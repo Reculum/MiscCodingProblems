@@ -6,9 +6,9 @@
 
 using namespace std;
 
-void generateMajorityArr(int arr[], const int _l){
+void generateMajorityArr(int arr[], const int _l, const int seed){
 
-	srand(time(0));
+	srand(seed);
 
 	int n = (_l / 2	) + 1;
 	int majElem = rand() % _l;

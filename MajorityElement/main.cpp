@@ -11,11 +11,10 @@ int ComputeMajorotyElement(int arr[], const int _l){
 	int OldestCoupleNums = 0;
 	bool OldestCoupleFound = false;
 
-	int tmp;
 	int swapIndx;
 	int k = 0;
 
-	while (k < _l){
+	while (k + 1 < _l){
 
 		if (OldestCoupleFound){
 
@@ -31,9 +30,10 @@ int ComputeMajorotyElement(int arr[], const int _l){
 			}
 			else{
 
-				tmp = arr[OldestCoupleIndex];
 				arr[OldestCoupleIndex] = arr[swapIndx];
-				arr[swapIndx] = tmp;
+				arr[swapIndx] = OldestCoupleItem;
+
+				//stampa_arr(arr, _l, false);
 
 				OldestCoupleNums -= 1;
 
@@ -60,15 +60,21 @@ int ComputeMajorotyElement(int arr[], const int _l){
 		
 	}
 
+	
+	if ( (_l % 2 == 0) || (OldestCoupleNums != 0)){return OldestCoupleItem;}
+	else{return arr[_l - 1];}
 }
 
 int main(){
 
-	int l = 10;
+	int l = 25;
 	int arr[l];
+
+	int seed = time(0);
 	
-	generateMajorityArr(arr, l);
-	
+	generateMajorityArr(arr, l, seed);
 	stampa_arr(arr, l, false);
+
+	cout << ComputeMajorotyElement(arr, l) << endl;
 
 }
