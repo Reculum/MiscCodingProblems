@@ -1,6 +1,6 @@
 # MiscCodingProblems
 
-A curated repository of my solutions to various computational problems, categorized by difficulty, topic, and programming language.
+A curated repository of my solutions to various computational problems, categorized by title, topic, programming language and computational complexities.
 ---
 
 ## Solutions Table
