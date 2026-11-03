@@ -67,7 +67,7 @@ int ComputeMajorotyElement(int arr[], const int _l){
 
 int main(){
 
-	int l = 25;
+	int l = 100;
 	int arr[l];
 
 	int seed = time(0);
