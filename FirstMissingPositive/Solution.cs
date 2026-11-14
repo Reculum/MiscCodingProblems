@@ -5,7 +5,7 @@ namespace FirstMissingPositive;
 public class Solution()
 {
 
-	public int FirstMissingPositive(int[] arr)
+	public static int FirstMissingPositive(int[] arr)
 	{
 
 		int posMin = int.MaxValue;
@@ -18,7 +18,7 @@ public class Solution()
 
 		if (posMin != 1){return 1;}
 
-		for (int k = 0; k < arr.Length; k++)
+		for (int k = 0; k < _l; k++)
 		{
 
 			bool endCycle = false;
@@ -26,7 +26,7 @@ public class Solution()
 			int activeIndx = k;
 			int activeValue = arr[activeIndx];
 
-			while (!endCycle)
+			while ( (!endCycle) && (activeValue > 0) )
 			{
 
 				int correctIndex = activeValue - posMin;
@@ -49,9 +49,9 @@ public class Solution()
 			}
 		}
 
-		int candidateRet = posMin + 1;
+		int candidateRet = posMin;
 
-		for (int k = 1; k < _l; k++)
+		for (int k = 0; k < _l; k++)
 		{			
 			if (arr[k] != candidateRet){return candidateRet;}
 			else{candidateRet += 1;}

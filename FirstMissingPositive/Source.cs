@@ -6,10 +6,11 @@ public class Source
 	
 	public static void Main()
 	{
-		
-		int[] a = genIntArray.newArr(10);
+		int[] arr = [7,8,9,11,12]; 
 
-		genIntArray.print(a);
+		int a = Solution.FirstMissingPositive(arr);
+
+		Console.WriteLine(a);		
 
 	}
 
