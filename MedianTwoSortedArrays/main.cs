@@ -27,7 +27,7 @@ class Solution
 		int upperShift;
 		int delta;
 
-		while ( (topLeft >= bottomLeft + 1) && (topRight >= bottomRight + 1) )
+		while ( (topLeft > bottomLeft + 1) && (topRight > bottomRight + 1) )
 		{
 			
 			lMedianLeft = left[ (int) Double.Floor( (topLeft + bottomLeft) / 2)];
@@ -46,7 +46,7 @@ class Solution
 				lower = lMedianRight;
 				IsLowerLeft = false;				
 			}
-			
+
 
 			if (rMedianLeft <= rMedianRight)
 			{
@@ -75,12 +75,18 @@ class Solution
 			if (IsUpperLeft){topLeft -= delta;}
 			else{topRight -= delta;}
 
-								
-
-
 		}
 
+		lMedianLeft = left[ (int) Double.Floor( (topLeft + bottomLeft) / 2)];
+		rMedianLeft = left[ (int) Double.Ceiling( (topLeft + bottomLeft) / 2)];
 
+		lMedianRight = right[ (int) Double.Floor( (topRight + bottomRight) / 2) ];
+		rMedianRight = right[ (int) Double.Ceiling( (topRight + bottomRight) / 2) ];
+
+		if ( (lMedianLeft <= lMedianRight) && (rMedianRight <= rMedianLeft) ){return (lMedianRight + rMedianRight)/2;}
+		else if ( (lMedianRight <= lMedianLeft) && (rMedianRight <= rMedianLeft) ){return (lMedianLeft + rMedianRight)/2;}
+		else if ( (lMedianLeft <= lMedianRight) && (rMedianLeft <= rMedianRight) ){return (lMedianRight + rMedianLeft)/2;}
+		else{return (lMedianLeft + rMedianLeft)/2;}
 
 	}
 
