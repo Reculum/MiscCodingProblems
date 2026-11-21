@@ -7,8 +7,8 @@ public class Test
 	public static void Main()
 	{
 		
-		int[] l = [1,2,3,4,5];
-		int[] r = [6,7,8,9,10,11,12,13,14,15,16,17];
+		int[] l = [-10, -9, -8];
+		int[] r = [1, 2];
 
 		Solution sol = new Solution();
 		double x = sol.FindMedianSortedArrays(l, r);

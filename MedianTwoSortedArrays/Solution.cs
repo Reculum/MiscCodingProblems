@@ -5,21 +5,32 @@ namespace MedianTwoSortedArrays;
 class Solution
 {
 
-	private double BaseCase(int[] left, int[] right)
+	private double BaseCase(int[] left, int[] right, int bottomLeft, int topLeft,
+							int bottomRight, int topRight)
 	{
-		
+
 		if (left.Length > right.Length)
 		{
-			int[] tmp = right;
-			right = left;
-			left = tmp;
+			int[] tmp = left;
+			int tmp_1 = bottomLeft;
+			int tmp_2 = topLeft;
+
+			left = right;
+			right = tmp;
+
+			bottomLeft = bottomRight;
+			bottomRight = tmp_1;
+
+			topLeft = topRight;
+			topRight = tmp_2;
+
 		}
 
-		int lMedianIdxRight = (int) Double.Floor( ( (double) right.Length - 1 ) / 2 );
-		int rMedianIdxRight = (int) Double.Ceiling( ( (double) right.Length - 1 ) / 2 );
+		int lMedianIdxRight = (int) Double.Floor( ( (double) topRight + bottomRight ) / 2 );
+		int rMedianIdxRight = (int) Double.Ceiling( ( (double) topRight + bottomRight ) / 2 );
 
-		int lMedianIdxLeft = (int) Double.Floor( ( (double) left.Length - 1 ) / 2 );
-		int rMedianIdxLeft = (int) Double.Ceiling( ( (double) left.Length - 1 ) / 2 );
+		int lMedianIdxLeft = (int) Double.Floor( ( (double) topLeft + bottomLeft) / 2 );
+		int rMedianIdxLeft = (int) Double.Ceiling( ( (double) topLeft + bottomLeft) / 2 );
 
 		int lMedianLeft = left[lMedianIdxLeft];
 		int rMedianLeft = left[rMedianIdxLeft];
@@ -30,7 +41,7 @@ class Solution
 		List<int> solver = new List<int>();
 
 		solver.Add(lMedianLeft);
-		if (rMedianLeft != lMedianIdxLeft){solver.Add(rMedianLeft);}
+		if (rMedianLeft != lMedianLeft){solver.Add(rMedianLeft);}
 
 		solver.Add(lMedianRight);
 		if (lMedianRight != rMedianRight){solver.Add(rMedianRight);}
@@ -145,7 +156,7 @@ class Solution
 
 		}
 
-		return BaseCase(left[bottomLeft..(topLeft+1)], right[bottomRight..(topRight+1)]);
+		return BaseCase(left, right, bottomLeft, topLeft, bottomRight, topRight);
 
 
 	}
