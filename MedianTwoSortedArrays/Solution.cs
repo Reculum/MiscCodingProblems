@@ -5,7 +5,54 @@ namespace MedianTwoSortedArrays;
 class Solution
 {
 
-	public static double FindMedianSortedArrays(int[] left, int[] right)
+	private double BaseCase(int[] left, int[] right)
+	{
+		
+		if (left.Length > right.Length)
+		{
+			int[] tmp = right;
+			right = left;
+			left = tmp;
+		}
+
+		int lMedianIdxRight = (int) Double.Floor( ( (double) right.Length - 1 ) / 2 );
+		int rMedianIdxRight = (int) Double.Ceiling( ( (double) right.Length - 1 ) / 2 );
+
+		int lMedianIdxLeft = (int) Double.Floor( ( (double) left.Length - 1 ) / 2 );
+		int rMedianIdxLeft = (int) Double.Ceiling( ( (double) left.Length - 1 ) / 2 );
+
+		int lMedianLeft = left[lMedianIdxLeft];
+		int rMedianLeft = left[rMedianIdxLeft];
+
+		int lMedianRight = right[lMedianIdxRight];		
+		int rMedianRight = right[rMedianIdxRight];
+
+		List<int> solver = new List<int>();
+
+		solver.Add(lMedianLeft);
+		if (rMedianLeft != lMedianIdxLeft){solver.Add(rMedianLeft);}
+
+		solver.Add(lMedianRight);
+		if (lMedianRight != rMedianRight){solver.Add(rMedianRight);}
+		
+
+		if (lMedianIdxRight >= 1){solver.Add(right[lMedianIdxRight - 1]);}
+		if (rMedianIdxRight <= right.Length - 2){solver.Add(right[rMedianIdxRight + 1]);}
+
+		int[] solverArray = solver.ToArray();
+
+		solverArray.Sort();
+
+		int lSolver = (int) Double.Floor( ( (double) solverArray.Length - 1 ) / 2 );
+		int rSolver = (int) Double.Ceiling( ( (double) solverArray.Length - 1 ) / 2 );
+
+		return ( (double) solverArray[lSolver] + solverArray[rSolver]) / 2;
+
+	
+		
+	}
+
+	public double FindMedianSortedArrays(int[] left, int[] right)
 	{
 
 		double lMedianLeft;
@@ -98,22 +145,7 @@ class Solution
 
 		}
 
-		lMedianLeft = left[ (int) Double.Floor( ( (double) topLeft + bottomLeft ) / 2)];
-		lMedianRight = right[ (int) Double.Floor( ( (double) topRight + bottomRight ) / 2) ];
-
-		rMedianLeft = left[ (int) Double.Ceiling( ( (double) topLeft + bottomLeft ) / 2)];		
-		rMedianRight = right[ (int) Double.Ceiling( ( (double) topRight + bottomRight ) / 2) ];
-
-
-		if ( (lMedianLeft <= lMedianRight) && (rMedianRight <= rMedianLeft) ){return (lMedianRight + rMedianRight)/2;}
-		else if ( (lMedianRight <= lMedianLeft) && (rMedianRight <= rMedianLeft) ){return (lMedianLeft + rMedianRight)/2;}
-		else if ( (lMedianLeft <= lMedianRight) && (rMedianLeft <= rMedianRight) ){return (lMedianRight + rMedianLeft)/2;}
-		else{return (lMedianLeft + rMedianLeft)/2;}
-
-
-		
-		
-		
+		return BaseCase(left[bottomLeft..(topLeft+1)], right[bottomRight..(topRight+1)]);
 
 
 	}
